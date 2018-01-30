@@ -1859,6 +1859,64 @@ public class TypeForMe extends javax.swing.JFrame {
         test.append("\n");
         test.append("\t//-----------------------------------------------------------------------------");
         cppdisplayJTextArea.setText(test.toString());
+        
+        functionName = new String[paramAmount];
+        functionType = new String[paramAmount];
+        functionValue = new String[paramAmount];
+        functionDescription = new String[paramAmount];
+        //Do stuff in header too
+        for (int i = 0; i < paramAmount; i++)
+        {
+            functionName[i] = cppfunctionName[i];
+            functionType[i] = cppfunctionType[i];
+            functionValue[i] = cppfunctionValue[i];
+        }
+        
+        test = new StringBuffer();     // TODO add your handling code here:
+        test.append("\n\t//\t\t\t\t" + cppfunctionTypeJTextField.getText() + " " + cppfunctionJTextField.getText() + "(");
+        size = cppfunctionName.length;
+        if (size != 0)
+        for (int i = 0; i < size; i++)
+        {
+            test.append(cppfunctionType[i] + " " + cppfunctionName[i]);
+            if (!(cppfunctionValue[i].isEmpty()))
+                test.append(" = " + cppfunctionValue[i]);
+            if (i + 1 != size)
+            {
+                test.append(", ");
+            }
+        }
+        test.append(")\n\t//\t\t\t\t\t" + "Description: ");
+        temp = cppdescriptionJTextArea.getText();
+        if (temp == "")
+            test.append("N/A");
+        else {test.append(temp);};
+        test.append("\n\t//\t\t\t\t\tParameter: ");
+        if (paramAmount > 0)
+        {
+            for (int i = 0; i < paramAmount; i++)
+            {
+                test.append("\n\t//\t\t\t\t\t\t" + cppfunctionType[i] + " " + cppfunctionName[i] + "\n\t//\t\t\t\t\t\t\t" + cppfunctionDescription[i]);
+            }
+        }
+        else {test.append("N/A");};
+        test.append("\n\t//\t\t\t\t\tReturn: ");
+        temp = returnJTextArea.getText();
+        if (temp.isEmpty())
+            test.append("N/A");
+        else
+            test.append(temp);
+        test.append("\n\t//\t");
+//        if(inlineJCheckBox.isSelected())
+//        {
+//            methodsInline.append(test);
+//            displayJTextArea.setText(methodsInline.toString());
+//        }
+//        else
+//        {
+        methodsNonInline.append(test);
+        displayJTextArea.setText(methodsNonInline.toString());
+        //}
     }//GEN-LAST:event_cppaddJButtonActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
